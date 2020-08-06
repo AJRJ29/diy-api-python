@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/flasql'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/messege'
 app.config['FLASK_ENV'] = 'development'
 app.config['FLASK_APP'] = 'api.py'
 
