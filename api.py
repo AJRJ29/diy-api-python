@@ -1,32 +1,29 @@
-from models import app
-from flask import request
+from models import app, Message
+from flask import jsonify, request
+from crud.message_crud import get_all_messages, create_message, get_message, update_message, delete_message
 
 @app.route('/')
 def home():
   return f"Welcome Home"
 
-@app.route('/messeges', methods=['GET', 'POST'])
-def widgets():
-  if request.method == 'POST':
-    return f"Hello Widgets"
+@app.route('/users', methods=['GET', 'POST'])
+def user_index_create():
+  if request.method == 'GET':
+    return get_all_users()
   else:
-    return "this is the get route"
+    return jsonify(message='route coming soon')
 
-@app.route('/messeges/:id')
-def create_widgets():
-  return f"Creating widgets"
-
-
-@app.route('/messeges/:id', methods=['GET', 'PUT'])
-def widgets():
-  if request.method == 'PUT':
-    return f"Update Widgets"
-  else:
-    return "this is the get route"
-
-@app.route('/messeges/:id', methods=['GET', 'DELETE'])
-def widgets():
-  if request.method == 'DELETE':
-    return f"Delete Widgets"
-  else:
-    return "this is the get route"
+@app.route('/messages', methods=['GET', 'POST'])
+def message_index_create():
+    if request.method == 'GET':
+        return get_all_messages()
+    if request.method == 'POST':
+        return create_message(name=request.form['name'], messages=request.form['messages'], quantity=request.form['quantity'])
+@app.route('/messages/<id>', methods=['GET', 'PUT', 'DELETE'])
+def message_show_put_delete(id):
+    if request.method == 'GET':
+        return get_user(id)
+    if request.method == 'PUT':
+        return get_message(id)
+    if request.method == 'DELETE':
+        return delete_message(id)
